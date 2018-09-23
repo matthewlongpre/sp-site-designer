@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+.loading {
+  margin: auto;
+  position: absolute;
+}
+
+.items {
+  list-style: none;
+}
+
+.item {
+  padding: 5px 10px;
+}
+
+.item h3, .item h4 {
+  margin: 5px 0;
+}
+
+.item a {
+  text-decoration: none;
+}
+
+.item .description {
+  display: block;
+  font-size: 80%;
+  font-style: italic;
+}
+
+.sm-label {
+  font-size: 66%;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+.container {
+  display: flex;
+}
+
+.layout--left {
+  flex-shrink: 0;
+}
+
+.layout--right {
+  flex-basis: 50%;
+  flex-grow: 0;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 40px;
+}
+
