@@ -5,6 +5,17 @@
 .loading {
   margin: auto;
   position: absolute;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.loading > div {
+  margin: auto;
 }
 
 .items {

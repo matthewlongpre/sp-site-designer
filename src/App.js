@@ -6,7 +6,8 @@ import locale from 'react-json-editor-ajrm/locale/en';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-import Navigation from './components/Navigation.js';
+import { BeatLoader } from 'react-spinners';
+
 import ActionForm from './components/ActionForm.js';
 import SiteDesignListing from './components/SiteDesignListing';
 import SiteScriptListing from './components/SiteScriptListing';
@@ -102,7 +103,14 @@ class App extends Component {
 
     return (
       <div>
-        {loading && <div className="loading">LOADING</div>}
+        {loading && <div className="loading">
+          <BeatLoader
+            sizeUnit={"px"}
+            size={24}
+            color={'#123abc'}
+            loading={loading}
+          />
+        </div>}
 
         {page === "Home" &&
 
@@ -110,9 +118,9 @@ class App extends Component {
             <div className="layout--left p-3">
 
               <Tabs selectedIndex={tabIndex}
-                onSelect={tabIndex => 
+                onSelect={tabIndex =>
                   this.setState({
-                    tabIndex, selectedSiteScript: null 
+                    tabIndex, selectedSiteScript: null
                   })}>
                 <TabList>
                   <Tab>Site Designs</Tab>
