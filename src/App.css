@@ -9,10 +9,12 @@
 
 .items {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .item {
-  padding: 5px 10px;
+  padding: 5px 0px;
 }
 
 .item h3, .item h4 {
@@ -40,6 +42,7 @@
 }
 
 .layout--left {
+  flex-basis: 50%;
   flex-shrink: 0;
 }
 
@@ -51,3 +54,18 @@
   padding: 40px;
 }
 
+.action-form {
+  margin-top: 20px;
+}
+
+.action-form label {
+  display: block;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
