@@ -101,3 +101,7 @@
 .p-3 {
   padding: 1rem;
 }
+
+.text-sm {
+  font-size: 80%;
+}

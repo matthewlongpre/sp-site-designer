@@ -9,6 +9,7 @@ import 'react-tabs/style/react-tabs.css';
 import { BeatLoader } from 'react-spinners';
 
 import ActionForm from './components/ActionForm.js';
+import ActionListing from './components/ActionListing';
 import SiteDesignListing from './components/SiteDesignListing';
 import SiteScriptListing from './components/SiteScriptListing';
 
@@ -151,12 +152,7 @@ class App extends Component {
                     {!loading && selectedSiteScript &&
                       <div>
                         <h2>{selectedSiteScript.Title}</h2>
-                        <h3>Actions:</h3>
-                        <ul>
-                          {siteScriptObject.actions.map(action =>
-                            <li key={selectedSiteScript.Id}>{action.verb}</li>
-                          )}
-                        </ul>
+                        <ActionListing items={siteScriptObject.actions} selectedSiteScript={selectedSiteScript} />
                       </div>
                     }
                   </TabPanel>
