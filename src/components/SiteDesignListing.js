@@ -17,7 +17,7 @@ class SiteDesignListing extends Component {
                     <li key={siteDesign.Id} className="item">
                         <h3>{siteDesign.Title}</h3>
                         <span className="description">{siteDesign.Description}</span>
-                        <SiteScriptListing items={siteDesign.SiteScripts} getSiteScriptMetadata={this.props.getSiteScriptMetadata} isSubComponent={true} clearSelectedSiteScript={this.clearSelectedSiteScript} />
+                        <SiteScriptListing items={siteDesign.SiteScripts} getSiteScriptMetadata={this.props.getSiteScriptMetadata} isSubComponent={true} selectedSiteScript={this.props.selectedSiteScript} clearSelectedSiteScript={this.clearSelectedSiteScript} />
                     </li>
                 )}
             </ul>

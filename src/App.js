@@ -129,11 +129,11 @@ class App extends Component {
 
                 <TabPanel>
                   <h2>Site Designs</h2>
-                  <SiteDesignListing items={siteDesignsWithSiteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata} clearSelectedSiteScript={this.clearSelectedSiteScript} />
+                  <SiteDesignListing items={siteDesignsWithSiteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata} selectedSiteScript={selectedSiteScript} clearSelectedSiteScript={this.clearSelectedSiteScript} />
                 </TabPanel>
                 <TabPanel>
                   <h2>Site Scripts</h2>
-                  <SiteScriptListing items={siteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata} />
+                  <SiteScriptListing items={siteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata} selectedSiteScript={selectedSiteScript} />
                 </TabPanel>
               </Tabs>
 
@@ -151,6 +151,7 @@ class App extends Component {
                     {!loading && selectedSiteScript &&
                       <div>
                         <h2>{selectedSiteScript.Title}</h2>
+                        <h3>Actions:</h3>
                         <ul>
                           {siteScriptObject.actions.map(action =>
                             <li key={selectedSiteScript.Id}>{action.verb}</li>
@@ -162,8 +163,10 @@ class App extends Component {
                   <TabPanel>
                     <JSONInput
                       id='json-content'
+                      theme='light_mitsuketa_tribute'
                       placeholder={siteScriptObject}
                       locale={locale}
+                      width='100%'
                       height='550px'
                     />
                   </TabPanel>
@@ -172,7 +175,6 @@ class App extends Component {
 
             </div>
           </div>
-
         }
 
         {page === "createSiteScript" && <ActionForm />}

@@ -34,14 +34,14 @@ class SiteScriptListing extends Component {
                 {isVisible && <ul className="sub-items">
                     <div className="sm-label">Site Scripts:</div>
                     {this.props.items.map(siteScript =>
-                        <li className="sub-item" onClick={() => this.handleSiteScriptClick(siteScript.Id)} key={siteScript.Id}><h4>{siteScript.Title}</h4></li>
+                        <li className={"sub-item " + (this.props.selectedSiteScript && (this.props.selectedSiteScript.Id === siteScript.Id) ? "selected" : "") } onClick={() => this.handleSiteScriptClick(siteScript.Id)} key={siteScript.Id}><h4>{siteScript.Title}</h4></li>
                     )}
                 </ul>}
 
                 {!this.props.isSubComponent &&
                     <ul className="items">
                         {this.props.items.map(siteScript =>
-                            <li className="item" onClick={() => this.handleSiteScriptClick(siteScript.Id)} key={siteScript.Id}><h4>{siteScript.Title}</h4></li>
+                        <li className={"item " + (this.props.selectedSiteScript && (this.props.selectedSiteScript.Id === siteScript.Id) ? "selected" : "")} onClick={() => this.handleSiteScriptClick(siteScript.Id)} key={siteScript.Id}><h4>{siteScript.Title}</h4></li>
                         )}
                     </ul>
                 }
