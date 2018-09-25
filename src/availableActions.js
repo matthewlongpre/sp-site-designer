@@ -6,6 +6,10 @@ const availableActions = [
             {
                 name: "url",
                 displayName: "Flow URL"
+            },
+            {
+                name: "name",
+                displayName: "Name"
             }
         ]
     },
