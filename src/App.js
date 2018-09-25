@@ -3,6 +3,8 @@ import './App.css';
 import axios from 'axios';
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 import Navigation from './components/Navigation.js';
 import ActionForm from './components/ActionForm.js';
@@ -16,11 +18,12 @@ class App extends Component {
       siteDesigns: [],
       siteScripts: [],
       loading: true,
-      showJSON: false,
-      page: "Home"
+      page: "Home",
+      tabIndex: 0
     };
     this.getSiteScriptMetadata = this.getSiteScriptMetadata.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.clearSelectedSiteScript = this.clearSelectedSiteScript.bind(this);
   }
 
   componentDidMount() {
@@ -60,18 +63,18 @@ class App extends Component {
       });
   }
 
-  handleShowJSON() {
-    this.setState(prevState => ({
-      showJSON: !prevState.showJSON
-    }))
-  }
-
   handlePageChange(page) {
     this.setState({ page: page });
   }
 
+  clearSelectedSiteScript() {
+    this.setState({
+      selectedSiteScript: null
+    });
+  }
+
   render() {
-    const { loading, page, siteDesigns, siteScripts, selectedSiteScript, showJSON } = this.state;
+    const { loading, page, tabIndex, siteDesigns, siteScripts, selectedSiteScript } = this.state;
     const siteDesignsWithSiteScripts = [];
 
     // each site design
@@ -100,61 +103,73 @@ class App extends Component {
     return (
       <div>
         {loading && <div className="loading">LOADING</div>}
-        <Navigation handlePageChange={this.handlePageChange} />
 
-        {page === "siteDesigns" &&
+        {page === "Home" &&
 
           <div className="container">
             <div className="layout--left p-3">
-              <h2>Site Designs</h2>
-              <SiteDesignListing items={siteDesignsWithSiteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata} />
-            </div>
-            <div className="layout--right">
-              <button onClick={() => this.handleShowJSON()}>Show JSON</button>
-              {showJSON && <JSONInput
-                id='json-content'
-                placeholder={siteScriptObject}
-                locale={locale}
-                height='550px'
-              />}
 
-              <ul>
-                {!loading && selectedSiteScript && siteScriptObject.actions.map(action =>
-                  <li key={selectedSiteScript.Id}>{action.verb}</li>
-                )}
-              </ul>
+              <Tabs selectedIndex={tabIndex}
+                onSelect={tabIndex => 
+                  this.setState({
+                    tabIndex, selectedSiteScript: null 
+                  })}>
+                <TabList>
+                  <Tab>Site Designs</Tab>
+                  <Tab>Site Scripts</Tab>
+                </TabList>
+
+                <TabPanel>
+                  <h2>Site Designs</h2>
+                  <SiteDesignListing items={siteDesignsWithSiteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata} clearSelectedSiteScript={this.clearSelectedSiteScript} />
+                </TabPanel>
+                <TabPanel>
+                  <h2>Site Scripts</h2>
+                  <SiteScriptListing items={siteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata} />
+                </TabPanel>
+              </Tabs>
+
+            </div>
+            <div className="layout--right p-3">
+
+              {selectedSiteScript &&
+                <Tabs>
+                  <TabList>
+                    <Tab>Actions</Tab>
+                    <Tab>JSON</Tab>
+                  </TabList>
+
+                  <TabPanel>
+                    {!loading && selectedSiteScript &&
+                      <div>
+                        <h2>{selectedSiteScript.Title}</h2>
+                        <ul>
+                          {siteScriptObject.actions.map(action =>
+                            <li key={selectedSiteScript.Id}>{action.verb}</li>
+                          )}
+                        </ul>
+                      </div>
+                    }
+                  </TabPanel>
+                  <TabPanel>
+                    <JSONInput
+                      id='json-content'
+                      placeholder={siteScriptObject}
+                      locale={locale}
+                      height='550px'
+                    />
+                  </TabPanel>
+                </Tabs>
+              }
 
             </div>
           </div>
-        }
 
-        {page === "siteScripts" &&
-          <div className="container">
-            <div className="layout--left p-3">
-              <SiteScriptListing items={siteScripts} getSiteScriptMetadata={this.getSiteScriptMetadata}/>
-            </div>
-            <div className="layout--right">
-              <button onClick={() => this.handleShowJSON()}>Show JSON</button>
-              {showJSON && <JSONInput
-                id='json-content'
-                placeholder={siteScriptObject}
-                locale={locale}
-                height='550px'
-              />}
-
-              <ul>
-                {!loading && selectedSiteScript && siteScriptObject.actions.map(action =>
-                  <li key={selectedSiteScript.Id}>{action.verb}</li>
-                )}
-              </ul>
-
-            </div>
-          </div>
         }
 
         {page === "createSiteScript" && <ActionForm />}
 
-      </div>
+      </div >
     );
   }
 }

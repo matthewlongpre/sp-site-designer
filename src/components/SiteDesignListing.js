@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import SiteScriptListing from './SiteScriptListing';
 
 class SiteDesignListing extends Component {
+    constructor(props) {
+        super(props);
+        this.clearSelectedSiteScript = this.clearSelectedSiteScript.bind(this);
+    }
+    clearSelectedSiteScript() {
+        console.log("clearSelected - Site Design");
+        this.props.clearSelectedSiteScript();
+    }
     render() {
         return(
             <ul className="items">
@@ -9,7 +17,7 @@ class SiteDesignListing extends Component {
                     <li key={siteDesign.Id} className="item">
                         <h3>{siteDesign.Title}</h3>
                         <span className="description">{siteDesign.Description}</span>
-                        <SiteScriptListing items={siteDesign.SiteScripts} getSiteScriptMetadata={this.props.getSiteScriptMetadata} isSubComponent={true} />
+                        <SiteScriptListing items={siteDesign.SiteScripts} getSiteScriptMetadata={this.props.getSiteScriptMetadata} isSubComponent={true} clearSelectedSiteScript={this.clearSelectedSiteScript} />
                     </li>
                 )}
             </ul>

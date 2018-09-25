@@ -51,7 +51,6 @@
   flex-grow: 0;
   max-height: 100vh;
   overflow: auto;
-  padding: 40px;
 }
 
 .action-form {
