@@ -7,9 +7,6 @@ class ActionListing extends Component {
             return obj.verb === verb;
         });
         const action = selectedAction[0];
-        console.log(action);
-
-        console.log(this.props.items[0])
         let properties;
         if ("properties" in action) {
             properties = action.properties.map(property =>
